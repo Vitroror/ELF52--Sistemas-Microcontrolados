@@ -27,20 +27,16 @@ Start								;Label Start ... void main(void)
 	ldr r1, =0x1B001B00			;b) Salvar no registrador R1 o valor 0x1B00.1B00
 	ldr r2, =0x12345678			;c) Salvar no registrador R2 o valor 0x1234.5678		
 	ldr r3, =0x20000040			;d) Guardar na posição de memória 0x2000.0040 o valor de R0
-	str r0, [r3]
-	ldr r4, =0x20000044			;e) Guardar na posição de memória 0x2000.0044 o valor de R1
-	str r1, [r4]
-	ldr r5, =0x20000048			;f) Guardar na posição de memória 0x2000.0048 o valor de R2
-	str r2, [r5]
+	str r0, [r3]			
+	str r1, [r3, #4]			;e) Guardar na posição de memória 0x2000.0044 o valor de R1			
+	str r2, [r3, #8]			;f) Guardar na posição de memória 0x2000.0048 o valor de R2
 	ldr r6, =0xF0001			;g) Guardar na posição de memória 0x2000.004C o número 0xF0001
-	ldr r7, =0x2000004C
-	str r6, [r7]
+	str r6, [r3, #12]
 	movs r8, #0xCD				;h) Guardar na posição de memória 0x2000.0046 o byte 0xCD, sem sobrescrever os outros bytes da WORD
-	ldr r9, =0x20000046
-	strb r8, [r9]
-	ldr r10, [r3]				;i) Ler o conteúdo da memória cuja posição 0x2000.0040 e guardar no R7
-	ldr r11, [r5]				;j) Ler o conteúdo da memória cuja posição 0x2000.0048 o guardar R8
-	mov r12, r10				;k) Copiar para o R9 o conteúdo de R7
+	strb r8, [r3, #6]
+	ldr r7, [r3]				;i) Ler o conteúdo da memória cuja posição 0x2000.0040 e guardar no R7
+	ldr r8, [r3, #8]			;j) Ler o conteúdo da memória cuja posição 0x2000.0048 o guardar R8
+	movs r9, r7					;k) Copiar para o R9 o conteúdo de R7
 ; Final do código aqui <=========================================================
     NOP
     ALIGN                       	;garante que o fim da seção está alinhada 
